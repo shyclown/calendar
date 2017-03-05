@@ -12,9 +12,10 @@ var Calendar = function(oID)
   this.date_input = document.getElementById(oID);
   this.wrap = document.createElement('div');
   this.date_input.parentNode.insertBefore(this.wrap,this.date_input);
+  
   // Parse value inside of input if exist
   // and fill it to selected value
-  // attach event to listen to changes if input is kept visual - NOT REALISED
+  // attach event to listen to changes if input is kept visual - NOT IMPLEMENTED
   this.input_val = 'empty';
   var values_in_input = this.date_input.value;
   if(this.date_input.value!= ''){ this.input_val = this.date_input.value.split(".");}
@@ -25,21 +26,25 @@ var Calendar = function(oID)
   this.calendar_controls = this._el('div',this.wrap);
   this.calendar_placement = this.calendar_wrap;
   this.days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  
   // Load current date
   this.curr_date = new Date();
   this.curr_day = this.curr_date.getDate();
   this.curr_month = this.curr_date.getMonth();
   this.curr_year  = this.curr_date.getFullYear();
+  
   // Storing user selected date
   // Default value is current date
   this.selected_day_el = 'none';
   this.selected_day = (this.input_val == 'empty' ? this.curr_day : this.input_val[0]);
   this.selected_month = (this.input_val == 'empty' ? this.curr_month : (parseInt(this.input_val[1])-1));
   this.selected_year = (this.input_val == 'empty' ? this.curr_year : this.input_val[2]);
+  
   // This controls which calendar is currently displayed
   // Default values are taken from current date
   this.displayed_month = this.selected_month;
   this.displayed_year = this.selected_year;
+  
   // build first calendar
   this.calendar_table = '';
   this.generate();
